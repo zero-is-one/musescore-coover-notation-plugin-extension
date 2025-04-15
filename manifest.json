@@ -1,0 +1,30 @@
+{
+  "uri": "musescore://extensions/coover",
+  "type": "macros",
+  "title": "Coover Notation",
+  "description": "This plugin colors notes in the selection depending on their pitch as per the Boomwhackers convention",
+  "category": "composing-arranging-tools",
+  "thumbnail": "icon.png",
+  "version": "1.5",
+  "apiversion": 1,
+  "actions": [
+    {
+      "code": "angloCGAuto",
+      "type": "macros",
+      "title": "Add C/G Wheatstone Coover - Auto",
+      "path": "src/main.js"
+    },
+    {
+      "code": "angloCGPull",
+      "type": "macros",
+      "title": "Add C/G Wheatstone Coover - Pull",
+      "path": "src/main.js"
+    },
+    {
+      "code": "angloCGPush",
+      "type": "macros",
+      "title": "Add C/G Wheatstone Coover - Push",
+      "path": "src/main.js"
+    }
+  ]
+}
