@@ -1,3 +1,9 @@
+const ProcessMode = {
+  PUSH: "PROCESS_MODE_PUSH",
+  PULL: "PROCESS_MODE_PULL",
+  AUTO: "PROCESS_MODE_AUTO",
+};
+
 const Action = {
   PUSH: "ACTION_PUSH",
   PULL: "ACTION_PULL",
@@ -13,4 +19,5 @@ const Hand = {
 module.exports = {
   Action,
   Hand,
+  ProcessMode,
 };

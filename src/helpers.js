@@ -1,4 +1,19 @@
 const Note = require("./tonal-note-es5.js");
+const { Hand } = require("./enums.js");
+
+function getButtonsByNoteNamesAndAction(layout, noteNames, action) {
+  const buttons = layout.filter((button) =>
+    isNoteNameEqual(button[action], noteNames)
+  );
+  const leftHandButtons = buttons.filter((b) => b.hand === Hand.LEFT);
+  const rightHandButtons = buttons.filter((b) => b.hand === Hand.RIGHT);
+
+  return {
+    buttons,
+    leftHandButtons,
+    rightHandButtons,
+  };
+}
 
 // convert musescore Tonal Pitch Class enum to note name
 // https://musescore.org/en/handbook/developers-handbook/plugin-development/tonal-pitch-class-enum
@@ -82,6 +97,7 @@ function isNoteNameEqual(noteName1, noteNameOrArr) {
 }
 
 module.exports = {
+  getButtonsByNoteNamesAndAction,
   tonalPitchClassToNoteLetter,
   colorNote,
   isNoteNameEqual,

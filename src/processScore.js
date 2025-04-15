@@ -1,29 +1,21 @@
 const {
+  getButtonsByNoteNamesAndAction,
   noteElementToNoteName,
   isNoteNameEqual,
   colorNote,
 } = require("./helpers.js");
 const { Colors } = require("./colors.js");
-const layout = require("./layouts.js")["cg-wheatstone-30"].layout;
-const { Hand, Action } = require("./enums.js");
+const { Instrument } = require("./instruments.js");
+const { Action, ProcessMode } = require("./enums.js");
 
-function getButtonsByNoteNamesAndAction(noteNames, action) {
-  const buttons = layout.filter((button) =>
-    isNoteNameEqual(button[action], noteNames)
-  );
-  const leftHandButtons = buttons.filter((b) => b.hand === Hand.LEFT);
-  const rightHandButtons = buttons.filter((b) => b.hand === Hand.RIGHT);
-
-  return {
-    buttons,
-    leftHandButtons,
-    rightHandButtons,
-  };
-}
-
-function main() {
+function processScore(props) {
   api.log.info("//// hello coover notation");
   //api.log.info(Note.fromMidi(Note.props("E##4").midi, false));
+
+  const { mode = ProcessMode.AUTO, instrument = Instrument.WheatstoneCG30 } =
+    props;
+
+  const layout = instrument.layout;
 
   curScore.startCmd();
 
@@ -52,7 +44,6 @@ function main() {
     }
     endStaff = cursor.staffIdx;
   }
-  console.log(startStaff + " - " + endStaff + " - " + endTick);
 
   for (var staff = startStaff; staff <= endStaff; staff++) {
     for (var voice = 0; voice < 4; voice++) {
@@ -100,23 +91,23 @@ function main() {
             buttons: pushButtons,
             leftHandButtons: pushLeftHandButtons,
             rightHandButtons: pushRightHandButtons,
-          } = getButtonsByNoteNamesAndAction(noteNames, Action.PUSH);
+          } = getButtonsByNoteNamesAndAction(layout, noteNames, Action.PUSH);
 
           const {
             buttons: pullButtons,
             leftHandButtons: pullLeftHandButtons,
             rightHandButtons: pullRightHandButtons,
-          } = getButtonsByNoteNamesAndAction(noteNames, Action.PULL);
+          } = getButtonsByNoteNamesAndAction(layout, noteNames, Action.PULL);
 
           // color the notes based on the push and pull buttons
           for (i in noteElements) {
             const noteElement = noteElements[i];
 
             const isNotePushable = pushButtons.some((button) =>
-              isNoteNameEqual(button.push, noteNames[i])
+              isNoteNameEqual(button[Action.PUSH], noteNames[i])
             );
             const isNotePullable = pullButtons.some((button) =>
-              isNoteNameEqual(button.pull, noteNames[i])
+              isNoteNameEqual(button[Action.PULL], noteNames[i])
             );
 
             let color = Colors.actionNone;
@@ -177,7 +168,10 @@ function main() {
             cursor.add(bottomTextEle);
           }
 
-          if (isStaffPushable)
+          if (
+            isStaffPushable &&
+            [ProcessMode.AUTO, ProcessMode.PUSH].includes(mode)
+          )
             addCooverLabelToNoteElements({
               leftHandButtons: pushLeftHandButtons,
               rightHandButtons: pushRightHandButtons,
@@ -185,7 +179,10 @@ function main() {
               //offsetX: !isStaffBothActionable ? 0.0 : -0.5,
             });
 
-          if (isStaffPullable)
+          if (
+            isStaffPullable &&
+            [ProcessMode.AUTO, ProcessMode.PULL].includes(mode)
+          )
             addCooverLabelToNoteElements({
               preprentText: "—\n",
               leftHandButtons: pullLeftHandButtons,
@@ -201,3 +198,5 @@ function main() {
 
   curScore.endCmd();
 }
+
+module.exports = { processScore };

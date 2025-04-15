@@ -1,5 +1,5 @@
 {
-  "uri": "musescore://extensions/coover",
+  "uri": "musescore://extensions/coover-notation",
   "type": "macros",
   "title": "Coover Notation",
   "description": "This plugin colors notes in the selection depending on their pitch as per the Boomwhackers convention",
@@ -9,22 +9,40 @@
   "apiversion": 1,
   "actions": [
     {
-      "code": "angloCGAuto",
+      "code": "wheatstoneCGAuto",
       "type": "macros",
       "title": "Add C/G Wheatstone Coover - Auto",
-      "path": "src/main.js"
+      "path": "src/macros/wheatstoneCGAuto.js"
     },
     {
-      "code": "angloCGPull",
+      "code": "wheatstoneCGPull",
       "type": "macros",
       "title": "Add C/G Wheatstone Coover - Pull",
-      "path": "src/main.js"
+      "path": "src/macros/wheatstoneCGPull.js"
     },
     {
-      "code": "angloCGPush",
+      "code": "wheatstoneCGPush",
       "type": "macros",
       "title": "Add C/G Wheatstone Coover - Push",
-      "path": "src/main.js"
+      "path": "src/macros/wheatstoneCGPush.js"
+    },
+    {
+      "code": "jefferiesCGAuto",
+      "type": "macros",
+      "title": "Add C/G Jefferies Coover - Auto",
+      "path": "src/macros/jefferiesCGAuto.js"
+    },
+    {
+      "code": "jefferiesCGPull",
+      "type": "macros",
+      "title": "Add C/G Jefferies Coover - Pull",
+      "path": "src/macros/jefferiesCGPull.js"
+    },
+    {
+      "code": "jefferiesCGPush",
+      "type": "macros",
+      "title": "Add C/G Jefferies Coover - Push",
+      "path": "src/macros/jefferiesCGPush.js"
     }
   ]
 }
