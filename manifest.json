@@ -43,6 +43,12 @@
       "type": "macros",
       "title": "Add C/G Jefferies Coover - Push",
       "path": "src/macros/jefferiesCGPush.js"
+    },
+    {
+      "code": "colorBlack",
+      "type": "macros",
+      "title": "Color All Notes Black",
+      "path": "src/macros/colorBlack.js"
     }
   ]
 }
