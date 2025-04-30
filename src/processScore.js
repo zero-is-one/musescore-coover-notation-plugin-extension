@@ -131,40 +131,54 @@ function processScore(props) {
               leftHandButtons,
               rightHandButtons,
               color,
-              offsetX = 0.0,
               placementBelow = Placement.BELOW,
               placementAbove = Placement.ABOVE,
               alignTop = Align.TOP,
               alignBottom = Align.BOTTOM,
+              offsetXAbove = -0.4,
+              offsetXBelow = -0.4,
               offsetYBelow = 4.0,
-              offsetYAbove = -3.3,
+              offsetYAbove = -3.2,
               appendText = "",
               preprentText = "",
+              fontSize = 8.8,
             } = props;
+
+            const textLine = newElement(Element.TEXTLINE);
+            cursor.add(textLine);
 
             const topTextEle = newElement(Element.STAFF_TEXT);
             topTextEle.text =
               preprentText +
-              rightHandButtons.map((button) => button.cooverLabel).join("\n");
+              rightHandButtons
+                .map((button) => button.cooverLabel)
+                .map((b) => (b.length === 1 ? " " : "") + b)
+                .join("\n");
             topTextEle.autoplace = false;
             topTextEle.placement = placementAbove;
             topTextEle.align = alignBottom;
             topTextEle.offsetY = offsetYAbove;
             topTextEle.color = color;
-            topTextEle.offsetX = offsetX;
+            topTextEle.offsetX = offsetXAbove;
+            topTextEle.fontStyle = 1;
+            topTextEle.fontSize = fontSize;
             cursor.add(topTextEle);
 
             const bottomTextEle = newElement(Element.STAFF_TEXT);
             bottomTextEle.text =
-              [...leftHandButtons.map((button) => button.cooverLabel)].join(
-                "\n"
-              ) + appendText;
+              [
+                ...leftHandButtons
+                  .map((button) => button.cooverLabel)
+                  .map((b) => (b.length === 1 ? " " : "") + b),
+              ].join("\n") + appendText;
             bottomTextEle.autoplace = false;
             bottomTextEle.placement = placementBelow;
             bottomTextEle.align = alignTop;
             bottomTextEle.offsetY = offsetYBelow;
             bottomTextEle.color = color;
-            bottomTextEle.offsetX = offsetX;
+            bottomTextEle.offsetX = offsetXBelow;
+            bottomTextEle.fontStyle = 1;
+            bottomTextEle.fontSize = fontSize;
             cursor.add(bottomTextEle);
           }
 
