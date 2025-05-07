@@ -144,21 +144,18 @@ function processScore(props) {
               offsetXBelow = -0.3,
               offsetYBelow = 4.0,
               offsetYAbove = -3.2,
-              appendText = "",
-              preprentText = "",
               fontSize = 8.8,
+              addPullbar = false,
             } = props;
 
             const textLine = newElement(Element.TEXTLINE);
             cursor.add(textLine);
 
             const topTextEle = newElement(Element.STAFF_TEXT);
-            topTextEle.text =
-              preprentText +
-              rightHandButtons
-                .map((button) => button.cooverLabel)
-                .map((b) => (b.length === 1 ? " " : "") + b)
-                .join("\n");
+            topTextEle.text = rightHandButtons
+              .map((button) => button.cooverLabel)
+              .map((b) => (b.length === 1 ? " " : "") + b)
+              .join("\n");
             topTextEle.autoplace = false;
             topTextEle.placement = placementAbove;
             topTextEle.align = alignBottom;
@@ -169,13 +166,29 @@ function processScore(props) {
             topTextEle.fontSize = fontSize;
             cursor.add(topTextEle);
 
+            if (addPullbar) {
+              const pullbarEle = newElement(Element.STAFF_TEXT);
+              pullbarEle.text = "—";
+              pullbarEle.autoplace = false;
+              pullbarEle.placement = placementAbove;
+              pullbarEle.align = alignBottom;
+              pullbarEle.offsetY =
+                offsetYAbove -
+                1.3 -
+                Math.max(0, rightHandButtons.length - 1) * 2;
+              pullbarEle.color = color;
+              pullbarEle.offsetX = offsetXAbove;
+              pullbarEle.fontStyle = 1;
+              pullbarEle.fontSize = fontSize;
+              cursor.add(pullbarEle);
+            }
+
             const bottomTextEle = newElement(Element.STAFF_TEXT);
-            bottomTextEle.text =
-              [
-                ...leftHandButtons
-                  .map((button) => button.cooverLabel)
-                  .map((b) => (b.length === 1 ? " " : "") + b),
-              ].join("\n") + appendText;
+            bottomTextEle.text = [
+              ...leftHandButtons
+                .map((button) => button.cooverLabel)
+                .map((b) => (b.length === 1 ? " " : "") + b),
+            ].join("\n");
             bottomTextEle.autoplace = false;
             bottomTextEle.placement = placementBelow;
             bottomTextEle.align = alignTop;
@@ -203,7 +216,7 @@ function processScore(props) {
             [ProcessMode.AUTO, ProcessMode.PULL].includes(mode)
           )
             addCooverLabelToNoteElements({
-              preprentText: "—\n",
+              addPullbar: true,
               leftHandButtons: pullLeftHandButtons,
               rightHandButtons: pullRightHandButtons,
               color: Colors.actionPull,
