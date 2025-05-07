@@ -45,9 +45,21 @@
       "path": "src/macros/jefferiesCGPush.js"
     },
     {
+      "code": "wheatstoneCGColor",
+      "type": "macros",
+      "title": "Color C/G Wheatstone Coover",
+      "path": "src/macros/wheatstoneColor.js"
+    },
+    {
+      "code": "jefferiesCGColor",
+      "type": "macros",
+      "title": "Color C/G Jefferies Coover",
+      "path": "src/macros/jefferiesColor.js"
+    },
+    {
       "code": "colorBlack",
       "type": "macros",
-      "title": "Color All Notes Black",
+      "title": "Color Selected Notes Black",
       "path": "src/macros/colorBlack.js"
     }
   ]

@@ -123,6 +123,11 @@ function processScore(props) {
             colorNote(noteElement, color);
           }
 
+          if (ProcessMode.COLOR === mode) {
+            cursor.next();
+            continue;
+          }
+
           const isStaffPushable = pushButtons.length >= noteElements.length;
           const isStaffPullable = pullButtons.length >= noteElements.length;
 
@@ -135,8 +140,8 @@ function processScore(props) {
               placementAbove = Placement.ABOVE,
               alignTop = Align.TOP,
               alignBottom = Align.BOTTOM,
-              offsetXAbove = -0.4,
-              offsetXBelow = -0.4,
+              offsetXAbove = -0.2,
+              offsetXBelow = -0.3,
               offsetYBelow = 4.0,
               offsetYAbove = -3.2,
               appendText = "",

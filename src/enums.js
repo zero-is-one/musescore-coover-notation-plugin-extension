@@ -2,6 +2,7 @@ const ProcessMode = {
   PUSH: "PROCESS_MODE_PUSH",
   PULL: "PROCESS_MODE_PULL",
   AUTO: "PROCESS_MODE_AUTO",
+  COLOR: "PROCESS_MODE_COLOR",
 };
 
 const Action = {
